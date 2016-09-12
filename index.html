@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" ng-app="ngMem">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Memory</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="src/library.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/rootscopeListener.js"></script>
+    <script src="src/windowEvent.js"></script>
+    <script src="src/item.js"></script>
+    <style>
+      .mem-section {padding: 2em; margin: 1em; border: solid black 1px;}
+    </style>
+  </head>
+  <body ng-controller="HomeCtrl as homeCtrl">
+    <h1>Angular Memory</h1>
+
+    <div class="mem-section">
+      <label>Show RootScope Listener
+        <input type="checkbox" ng-model="homeCtrl.showRootscopeListener">
+      </label>
+      <div ng-if="homeCtrl.showRootscopeListener">
+        <button ng-click="homeCtrl.fireEvent('mem::changeColor')">Change Color!</button>
+        <mem-rootscope-listener>
+        </mem-rootscope-listener>
+      </div>
+    </div>
+
+
+    <div class="mem-section">
+      <label>Show Window Event
+        <input type="checkbox" ng-model="homeCtrl.showWindowEvent">
+      </label>
+      <div ng-if="homeCtrl.showWindowEvent">
+        <mem-window-event>
+        </mem-window-event>
+      </div>
+    </div>
+
+    <div class="mem-section">
+      <label>Show ng-Repeat / ng-If
+        <input type="checkbox" ng-model="homeCtrl.showRepeatIf">
+      </label>
+      <div ng-if="homeCtrl.showRepeatIf">
+        <button ng-click="homeCtrl.addItem()">Add Item</button>
+        <button ng-click="homeCtrl.clearItems()">Clear Items</button>
+
+        <p>Just evens:</p>
+        <span ng-repeat="item in homeCtrl.items" ng-if="item.id % 2 == 0">
+          <mem-item id="item.id">
+          </mem-item>
+        </span>
+
+        <p>Just odds:</p>
+        <span ng-repeat="item in homeCtrl.items" ng-if="item.id % 2 == 1">
+          <mem-item id="item.id">
+          </mem-item>
+        </span>
+      </div>
+    </div>
+
+    <div class="mem-section">
+      <label>Show ng-Repeat / filter
+        <input type="checkbox" ng-model="homeCtrl.showRepeatFilter">
+      </label>
+      <div ng-if="homeCtrl.showRepeatFilter">
+        <button ng-click="homeCtrl.addItem()">Add Item</button>
+        <button ng-click="homeCtrl.clearItems()">Clear Items</button>
+
+        <p>Just evens:</p>
+        <span ng-repeat="item in homeCtrl.items | filter:homeCtrl.isItemEven">
+          <mem-item id="item.id">
+          </mem-item>
+        </span>
+
+        <p>Just odds:</p>
+        <span ng-repeat="item in homeCtrl.items | filter:homeCtrl.isItemOdd">
+          <mem-item id="item.id">
+          </mem-item>
+        </span>
+      </div>
+    </div>
+
+  </body>
+</html>

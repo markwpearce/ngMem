@@ -1,0 +1,17 @@
+{
+  "name": "ng-mem",
+  "version": "1.0.0",
+  "description": "Test Memory Usage in an AngularJS app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8"
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  }
+}
