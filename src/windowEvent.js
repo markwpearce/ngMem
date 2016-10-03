@@ -1,4 +1,4 @@
-window.ngMemModule.directive("memWindowEvent", function() {
+window.ngMemModule.directive("memWindowEvent", function(memLeakService) {
 
   var ElementEvent = {
     template: '<div style="width:200px;height:100px;">Changed Color: {{elementEventCtrl.updates}}<div>',
@@ -21,9 +21,11 @@ window.ngMemModule.directive("memWindowEvent", function() {
 
       window.addEventListener('resize', setElementBGColor);
 
-      //scope.$on('$destroy', function() {
-      //  window.removeEventListener('resize', setElementBGColor);
-      //});
+      if(!memLeakService.isLeaky) {
+        scope.$on('$destroy', function() {
+          window.removeEventListener('resize', setElementBGColor);
+        });
+      }
     }
 
   };

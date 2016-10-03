@@ -1,9 +1,17 @@
 window.ngMemModule = angular.module('ngMem', [])
-  .controller('HomeCtrl', function($rootScope) {
+  .service('memLeakService', function(){
+    return {
+      isLeaky: true
+    };
+  })
+  .controller('HomeCtrl', function($rootScope, memLeakService) {
     var ctrl = this;
+    var nextItemId = 0;
+
     ctrl.hello = "Hello";
     ctrl.items = [];
-    var nextItemId = 0;
+
+    ctrl.leakService = memLeakService;
 
     ctrl.fireEvent  = function(name) {
       $rootScope.$broadcast(name);

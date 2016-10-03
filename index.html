@@ -16,6 +16,10 @@
   <body ng-controller="HomeCtrl as homeCtrl">
     <h1>Angular Memory</h1>
 
+    <label>Have memory leaks?
+      <input type="checkbox" ng-model="homeCtrl.leakService.isLeaky">
+    </label>
+
     <div class="mem-section">
       <label>Show RootScope Listener
         <input type="checkbox" ng-model="homeCtrl.showRootscopeListener">
@@ -38,7 +42,7 @@
       </div>
     </div>
 
-    <div class="mem-section">
+    <div class="mem-section" ng-show="homeCtrl.leakService.isLeaky">
       <label>Show ng-Repeat / ng-If
         <input type="checkbox" ng-model="homeCtrl.showRepeatIf">
       </label>
@@ -60,7 +64,7 @@
       </div>
     </div>
 
-    <div class="mem-section">
+    <div class="mem-section" ng-show="!homeCtrl.leakService.isLeaky">
       <label>Show ng-Repeat / filter
         <input type="checkbox" ng-model="homeCtrl.showRepeatFilter">
       </label>
