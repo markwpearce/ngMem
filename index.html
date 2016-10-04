@@ -9,6 +9,7 @@
     <script src="src/rootscopeListener.js"></script>
     <script src="src/windowEvent.js"></script>
     <script src="src/item.js"></script>
+    <script src="src/compileDirective.js"></script>
     <style>
       .mem-section {padding: 2em; margin: 1em; border: solid black 1px;}
     </style>
@@ -37,6 +38,7 @@
         <input type="checkbox" ng-model="homeCtrl.showWindowEvent">
       </label>
       <div ng-if="homeCtrl.showWindowEvent">
+        (Resize the window)
         <mem-window-event>
         </mem-window-event>
       </div>
@@ -82,6 +84,26 @@
         <span ng-repeat="item in homeCtrl.items | filter:homeCtrl.isItemOdd">
           <mem-item id="item.id">
           </mem-item>
+        </span>
+      </div>
+    </div>
+
+    <div class="mem-section">
+      <label>Show extra $compile
+        <input type="checkbox" ng-model="homeCtrl.showExtraCompile">
+      </label>
+      <div ng-if="homeCtrl.showExtraCompile">
+
+        <label>
+          AngularJS code to compile:
+        </label>
+
+        <input type="text" style="width:50%;" ng-model="homeCtrl.itemContent">
+        <button ng-click="homeCtrl.addCompileItem(homeCtrl.itemContent)">Add Compiled Item</button>
+
+        <span ng-repeat="compileItem in homeCtrl.compileItems">
+          <mem-compile-directive tag="'div'" content="compileItem.content">
+          </mem-compile-directive>
         </span>
       </div>
     </div>

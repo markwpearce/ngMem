@@ -13,16 +13,15 @@ angular.module('ngMem').directive("memCompileDirective", function($compile, memL
     },
     controllerAs: 'compileDirectiveCtrl',
     link: function(scope, element, attrs, ctrl) {
-
-      var htmlToAdd = '<'+ctrl.tag+'>{{compileDirectiveCtrl.content}}</'+ctrl.tag+'>';
+      var htmlToAdd = angular.element('<div></div>');
 
       if(memLeakService.isLeaky) {
-        $compile(htmlToAdd)(scope);
+        $compile(ctrl.content)(scope);
       }
 
-      var compiledElement = $compile(htmlToAdd)(scope);
-
-      element.append(compiledElement);
+      var compiledElement = $compile(ctrl.content)(scope);
+      htmlToAdd.append(compiledElement);
+      element.append(htmlToAdd);
 
     }
   };
